@@ -3,6 +3,7 @@ package taxiapp.farecalculator.controller;
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 import taxiapp.farecalculator.dto.response.RouteLengthTO
@@ -11,14 +12,15 @@ import taxiapp.farecalculator.service.FareService
 @RestController
 @RequestMapping("api/fare")
 class FareController @Autowired constructor(
-    @Value("\${service.address.maps}") val mapsServiceAddress: String,
+    @Value("\${service.address.maps}")
+    private val mapsServiceAddress: String,
     private val fareService: FareService,
     private val restTemplate: RestTemplate
 ){
     @GetMapping("/calculate")
     fun getRouteLength(@RequestParam originId: String, @RequestParam destinationId: String): ResponseEntity<Any> {
         val routeLengthUri = UriComponentsBuilder
-            .fromUriString("$mapsServiceAddress/messages/all")
+            .fromUriString("$mapsServiceAddress/api/maps/route")
             .queryParam("originId", originId)
             .queryParam("destinationId", destinationId)
             .build()
