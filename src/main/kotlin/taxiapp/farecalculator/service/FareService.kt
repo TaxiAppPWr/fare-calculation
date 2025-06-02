@@ -4,5 +4,5 @@ import taxiapp.farecalculator.dto.RideFareTO
 
 interface FareService {
     fun getFare(distance: Int, duration: Long): RideFareTO
-    fun getDriverProfit(cost: Double): Double
+    fun getDriverProfit(cost: Int): Int
 }
