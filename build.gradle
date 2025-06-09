@@ -47,6 +47,10 @@ kotlin {
     }
 }
 
+springBoot {
+    mainClass = "taxiapp.farecalculator.FareApplicationKt"
+}
+
 tasks.named("test") {
     useJUnitPlatform()
 }
