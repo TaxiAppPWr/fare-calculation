@@ -36,4 +36,12 @@ class FareController @Autowired constructor(
 
         return ResponseEntity.ok(fareService.getFare(body.distance, body.duration));
     }
+
+    @GetMapping("/health")
+    fun health(): ResponseEntity<Map<String, String>> {
+        return ResponseEntity.ok(mapOf(
+            "status" to "UP",
+            "service" to "farecalculator-service"
+        ))
+    }
 }
